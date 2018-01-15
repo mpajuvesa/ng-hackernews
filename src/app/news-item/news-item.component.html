@@ -1,0 +1,18 @@
+<div class="news-item" fxFlex fxLayoutGap="10px">
+  <div fxFlex="35px" class="score" fxLayoutAlign="center center">
+    <div class="score-amount">{{item.score}}</div>
+  </div>
+  <div fxFlex>
+    <div class="top" fxLayoutGap="5px" fxLayout="row">
+      <div class="title">{{item.title}}</div>
+      <div class="url" fxFlexAlign="end">
+        <a [href]="item.url">({{item.url | prettyUrl}})</a>
+      </div>
+    </div>
+    <div class="subtext" fxLayoutGap="5px" fxLayout="row">
+      <div class="by"><a href="">by {{item.by}}</a></div>
+      <div class="time">{{item.time | date}}</div>
+      <div class="comments"><a href="">{{item.descendants}} comments</a></div>
+    </div>
+  </div>
+</div>

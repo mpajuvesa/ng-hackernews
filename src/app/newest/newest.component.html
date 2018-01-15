@@ -1,0 +1,6 @@
+<div class="newest-container">
+  <div class="newest-item" *ngFor="let item of newest; let i = index">
+    <div class="rank">{{i+1}}</div>
+    {{item | json}}
+  </div>
+</div>
