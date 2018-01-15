@@ -16,9 +16,11 @@ import { JobsComponent } from './jobs/jobs.component';
 import { NewestComponent } from './newest/newest.component';
 
 import { ApiService } from './services/api.service';
+import { StateService } from './services/state.service';
 import { TopstoriesComponent } from './topstories/topstories.component';
 import { PrettyUrlPipe } from './pipes/pretty-url.pipe';
 import { DatePipe } from './pipes/date.pipe';
+import { LoadingBarComponent } from './loading-bar/loading-bar.component';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { DatePipe } from './pipes/date.pipe';
     NewestComponent,
     TopstoriesComponent,
     PrettyUrlPipe,
-    DatePipe
+    DatePipe,
+    LoadingBarComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,10 @@ import { DatePipe } from './pipes/date.pipe';
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [ApiService],
+  providers: [
+    ApiService,
+    StateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

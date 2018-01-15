@@ -14,11 +14,15 @@
 }
 
 .navigation {
-  display: block;
+  // display: block;
     a {
       font-size: 0.7rem;
       &:hover {
         text-decoration: underline;
       }
     }
+}
+
+.loading-bar-wrap {
+  height: 5px;
 }

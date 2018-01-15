@@ -3,12 +3,17 @@ import { HttpClient } from '@angular/common/http';
 
 import { Item } from '../interfaces/Item';
 
+import { StateService } from './state.service';
+
 const API_URL = 'https://hacker-news.firebaseio.com/v0';
 
 @Injectable()
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private stateService: StateService
+  ) { }
 
   topStories: number[] = [];
 
@@ -21,9 +26,11 @@ export class ApiService {
   }
 
   async getStoriesBulk() {
+    this.stateService.setLoading(true);
     const topStories: number[] = await this.getTopStories();
     const top = topStories.slice(0, this.maxBulkSize);
     const res = await Promise.all(top.map(id => this.getStoryById(id)));
+    this.stateService.setLoading(false);
     return res;
   }
 
