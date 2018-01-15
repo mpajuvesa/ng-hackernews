@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Item } from '../interfaces/Item';
 import { ApiService } from '../services/api.service';
 import { StateService } from '../services/state.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-topstories',
   templateUrl: './topstories.component.html',
   styleUrls: ['./topstories.component.scss']
 })
-export class TopstoriesComponent implements OnInit {
+export class TopstoriesComponent implements OnInit, OnDestroy {
 
-  topstories: Item[] = [];
+  items: Item[] = [];
+
+  refresh$: Subscription;
 
   constructor(
     private apiService: ApiService,
@@ -19,15 +22,21 @@ export class TopstoriesComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.getTopStories();
-    this.stateService.getRefresh().subscribe(async res => {
-      await this.getTopStories();
+    await this.getStories();
+    this.refresh$ = this.stateService.getRefresh().subscribe(async res => {
+      await this.getStories();
     });
   }
 
-  async getTopStories() {
-    const res: any = await this.apiService.getStoriesBulk();
-    this.topstories = res;
+  ngOnDestroy() {
+    if (this.refresh$) {
+      this.refresh$.unsubscribe();
+    }
+  }
+
+  async getStories() {
+    const res: any = await this.apiService.getTopStoriesBulk();
+    this.items = res;
   }
 
 }

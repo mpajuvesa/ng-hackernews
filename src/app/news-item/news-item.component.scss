@@ -3,6 +3,12 @@ $text-size-small: 0.7rem;
 
 $text-subtext-color: #616161;
 
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 .subtext {
   font-size: $text-size-small;
   color: $text-subtext-color;
@@ -26,16 +32,17 @@ $text-subtext-color: #616161;
 
 .top {
   font-size: $text-size-normal;
-  color: #212121;
+}
+
+.title {
+  & > a {
+    color: #212121;
+  }
 }
 .url {
   font-size: $text-size-small; 
 }
 
-a {
-  text-decoration: none;
+.link {
   color: #455A64;
-  &:hover {
-    text-decoration: underline;
-  }
 }

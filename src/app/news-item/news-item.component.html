@@ -4,15 +4,15 @@
   </div>
   <div fxFlex>
     <div class="top" fxLayoutGap="5px" fxLayout="row">
-      <div class="title">{{item.title}}</div>
+      <div class="title"><a [href]="item.url">{{item.title}}</a></div>
       <div class="url" fxFlexAlign="end">
-        <a [href]="item.url">({{item.url | prettyUrl}})</a>
+        <a [href]="item.url" class="link">({{item.url | prettyUrl}})</a>
       </div>
     </div>
     <div class="subtext" fxLayoutGap="5px" fxLayout="row">
-      <div class="by"><a href="">by {{item.by}}</a></div>
+      <div class="by"><a href="" class="link">by {{item.by}}</a></div>
       <div class="time">{{item.time | date}}</div>
-      <div class="comments"><a href="">{{item.descendants}} comments</a></div>
+      <div class="comments"><a href="" class="link">{{item.descendants}} comments</a></div>
     </div>
   </div>
 </div>
