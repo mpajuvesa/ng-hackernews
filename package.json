@@ -7,12 +7,18 @@
     "start": "ng serve",
     "aot": "ng serve --aot",
     "build": "ng build --prod",
+    "postinstall": "ng build --aot -prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "engines": {
+    "node": "8.9.4"
+  },
   "private": true,
   "dependencies": {
+    "@angular/cli": "1.6.4",
+    "@angular/compiler-cli": "^5.1.0",
     "@angular/animations": "^5.1.0",
     "@angular/common": "^5.1.0",
     "@angular/compiler": "^5.1.0",
