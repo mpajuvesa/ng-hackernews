@@ -1,3 +1,3 @@
-<p>
-  show works!
-</p>
+<div class="showstories-container" fxFlex fxFlexFill>
+  <app-news-item *ngFor="let item of items; let i = index" [item]="item" [index]="i+1"></app-news-item>
+</div>

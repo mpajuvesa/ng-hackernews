@@ -22,9 +22,9 @@ export class TopstoriesComponent implements OnInit, OnDestroy {
   ) { }
 
   async ngOnInit() {
-    await this.getStories();
+    await this.getItems();
     this.refresh$ = this.stateService.getRefresh().subscribe(async res => {
-      await this.getStories();
+      await this.getItems(res);
     });
   }
 
@@ -34,8 +34,8 @@ export class TopstoriesComponent implements OnInit, OnDestroy {
     }
   }
 
-  async getStories() {
-    const res: any = await this.apiService.getTopStoriesBulk();
+  async getItems(force: boolean = false) {
+    const res: any = await this.apiService.getItemsByType('topstories', force);
     this.items = res;
   }
 

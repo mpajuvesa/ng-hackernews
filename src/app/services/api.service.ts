@@ -16,62 +16,59 @@ export class ApiService {
     private stateService: StateService
   ) { }
 
-  topStories: Item[] = [];
-  newStories: Item[] = [];
-
-  topStoriesIds: number[] = [];
-  newStoriesIds: number[] = [];
-
   maxBulkSize = 15;
 
-  async getTopStories() {
-    const res: any = await this.http.get(`${API_URL}/topstories.json`).toPromise();
-    return res;
+  cache = {};
+
+  async fetch(url: string): Promise<any> {
+    return this.http.get(`${API_URL}/${url}`).toPromise();
   }
 
-  async getNewStories() {
-    const res: any = await this.http.get(`${API_URL}/newstories.json`).toPromise();
-    return res;
-  }
-
-  async getTopStoriesBulk() {
+  /**
+   * Fetches items by supplied type
+   * @param type topstories, newstories
+   * @param forceRefresh Force refresh
+   */
+  async getItemsByType(type: string, forceRefresh: boolean = false) {
     this.stateService.setLoading(true);
-    const topStories: number[] = await this.getTopStories();
 
-    if (_.isEqual(topStories, this.topStoriesIds)) {
-      this.stateService.setLoading(false);
-      return this.topStories;
-    }
+    // Fetch latest item ids
+    const latestIds: number[] = await this.fetch(`${type}.json`);
+    // Fetch max bulk size amount of items
+    const res = await this.fetchItems(type, latestIds.slice(0, this.maxBulkSize), forceRefresh);
 
-    this.topStoriesIds = topStories;
-
-    const storyIds = topStories.slice(0, this.maxBulkSize);
-    const res: any = await Promise.all(storyIds.map(id => this.getStoryById(id)));
-    this.topStories = res;
     this.stateService.setLoading(false);
     return res;
   }
 
-  async getNewStoriesBulk() {
-    this.stateService.setLoading(true);
-    const newStories: number[] = await this.getNewStories();
-
-    if (_.isEqual(newStories, this.newStoriesIds)) {
-      this.stateService.setLoading(false);
-      return this.newStories;
-    }
-
-    this.newStoriesIds = newStories;
-
-    const storyIds = newStories.slice(0, this.maxBulkSize);
-    const res: any = await Promise.all(storyIds.map(id => this.getStoryById(id)));
-    this.newStories = res;
-    this.stateService.setLoading(false);
+  /**
+   * Fetches items in bulk
+   * @param type
+   * @param ids
+   */
+  async getBulk(type: string, ids: number[]) {
+    const res: any[] = await Promise.all(ids.map(id => this.fetch(`item/${id}.json`)));
     return res;
   }
 
-  async getStoryById(id: number) {
-    const res = await this.http.get(`${API_URL}/item/${id}.json`).toPromise();
-    return res;
+  /**
+   * Fetches itemsby supplied type and ids
+   * @param type
+   * @param latestIds
+   */
+  async fetchItems(type: string, latestIds: number[], forceRefresh: boolean = false) {
+    const cacheIds: number[] = _.get(this.cache, `${type}.ids`, []);
+    const cacheValues: number[] = _.get(this.cache, `${type}.values`, []);
+
+    // Compare latest and cached ids
+    // If they do not match then we want to fetch new items
+    if (!_.isEqual(latestIds, cacheIds) || forceRefresh) {
+      const values = await this.getBulk(type, latestIds);
+      _.set(this.cache, `${type}.ids`, latestIds);
+      _.set(this.cache, `${type}.values`, values);
+      return values;
+    }
+
+    return cacheValues;
   }
 }

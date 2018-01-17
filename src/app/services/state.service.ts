@@ -19,8 +19,8 @@ export class StateService {
     return this.isLoading$;
   }
 
-  refresh(refresh: boolean = false) {
-    this.refresh$.next();
+  refresh(force: boolean = false) {
+    this.refresh$.next(force);
   }
 
   getRefresh(): Observable<any> {

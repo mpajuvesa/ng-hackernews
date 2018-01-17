@@ -21,9 +21,9 @@ export class NewestComponent implements OnInit, OnDestroy {
   ) { }
 
   async ngOnInit() {
-    await this.getStories();
+    await this.getItems();
     this.refresh$ = this.stateService.getRefresh().subscribe(async res => {
-      await this.getStories();
+      await this.getItems(res);
     });
   }
 
@@ -33,8 +33,8 @@ export class NewestComponent implements OnInit, OnDestroy {
     }
   }
 
-  async getStories() {
-    const res: any = await this.apiService.getNewStoriesBulk();
+  async getItems(force: boolean = false) {
+    const res: any = await this.apiService.getItemsByType('newstories', force);
     this.items = res;
   }
 }

@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    this.stateService.refresh();
+    this.stateService.refresh(true);
   }
 
 }
