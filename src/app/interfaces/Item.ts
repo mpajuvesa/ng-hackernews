@@ -1,4 +1,4 @@
-export interface Item {
+export default interface Item {
   id: number;
   deleted?: boolean;
   type?: string;

@@ -21,6 +21,7 @@ import { TopstoriesComponent } from './topstories/topstories.component';
 import { PrettyUrlPipe } from './pipes/pretty-url.pipe';
 import { DatePipe } from './pipes/date.pipe';
 import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LoadingBarComponent } from './loading-bar/loading-bar.component';
     TopstoriesComponent,
     PrettyUrlPipe,
     DatePipe,
-    LoadingBarComponent
+    LoadingBarComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

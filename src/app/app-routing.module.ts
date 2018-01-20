@@ -7,6 +7,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { ShowComponent } from './show/show.component';
 import { AskComponent } from './ask/ask.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   { path: '', component: TopstoriesComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'show', component: ShowComponent },
   { path: 'ask', component: AskComponent },
   { path: 'jobs', component: JobsComponent },
+  { path: 'user/:id', component: UserComponent },
   { path: '**', redirectTo: 'newest', }
 ];
 

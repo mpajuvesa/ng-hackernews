@@ -1,3 +1,15 @@
 <div fxFlex fxFlexFill>
-  {{items | json}}
+  <div class="top item" *ngFor="let item of items">
+    <div fxLayoutGap="5px" fxLayout="row">
+      <div class="title">
+        <a [href]="item.url">{{item.title}}</a>
+      </div>
+      <div class="url" fxFlexAlign="end">
+        <a [href]="item.url" class="link">({{item.url | prettyUrl}})</a>
+      </div>
+    </div>
+    <div class="subtext">
+      {{item.time | date}}
+    </div>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Item } from '../interfaces/Item';
+import Item from '../interfaces/Item';
 
 import { StateService } from './state.service';
 import * as _ from 'lodash';
@@ -62,7 +62,7 @@ export class ApiService {
 
     // Compare latest and cached ids
     // If they do not match then we want to fetch new items
-    if (!_.isEqual(latestIds, cacheIds) || forceRefresh) {
+    if (!_.isEqual(latestIds, cacheIds) || forceRefresh) {
       const values = await this.getBulk(type, latestIds);
       _.set(this.cache, `${type}.ids`, latestIds);
       _.set(this.cache, `${type}.values`, values);
@@ -70,5 +70,8 @@ export class ApiService {
     }
 
     return cacheValues;
+  }
+
+  async fetchNewComments() {
   }
 }

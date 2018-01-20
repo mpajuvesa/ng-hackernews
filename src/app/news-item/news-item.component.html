@@ -5,12 +5,12 @@
   <div fxFlex>
     <div class="top" fxLayoutGap="5px" fxLayout="row">
       <div class="title"><a [href]="item.url">{{item.title}}</a></div>
-      <div class="url" fxFlexAlign="end">
+      <div class="url" fxFlexAlign="end" *ngIf="item.url">
         <a [href]="item.url" class="link">({{item.url | prettyUrl}})</a>
       </div>
     </div>
     <div class="subtext" fxLayoutGap="5px" fxLayout="row">
-      <div class="by"><a href="" class="link">by {{item.by}}</a></div>
+      <div class="by"><a [href]="'user/'+item.by" class="link">by {{item.by}}</a></div>
       <div class="time">{{item.time | date}}</div>
       <div class="comments"><a href="" class="link">{{item.descendants}} comments</a></div>
     </div>

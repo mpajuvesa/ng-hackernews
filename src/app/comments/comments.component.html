@@ -1,1 +1,11 @@
-<p>TODO</p>
+<div fxFlex fxFlexFill>
+    <div class="item" *ngFor="let item of items">
+      <div class="subtext" fxLayout="row">
+        <div class="by"><a [href]="'user/'+item.by">{{item.by}}</a></div>
+        <div class="time">{{item.time | date}}</div>
+      </div>
+      <div class="top title" [innerHTML]="item.text">
+      </div>
+    </div>
+  </div>
+  

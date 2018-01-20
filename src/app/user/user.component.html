@@ -1,0 +1,41 @@
+WORK IN PROGRESS
+<div>
+  <div *ngIf="user" fxFlex fxLayout="column" fxLayoutGap="10px">
+    <div class="card" fxLayout="row" fxLayoutGap="15px">
+      <div fxLayout="column">
+        <div class="username">{{user.id}}</div>
+        <div fxLayout="row" fxLayoutGap="30px">
+          <div>
+            <div class="created">Created {{user.created | date}}</div>
+            <div class="karma">Karma {{user.karma}}</div>
+          </div>
+          <div *ngIf="submitted">
+            <div>Stories {{submitted.story.length}}</div>
+            <div>Comments {{submitted.comment.length}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="submitted card" *ngIf="submitted">
+      <!-- TODO: Wrap this in a component -->
+      <div class="stories">
+        <div class="submitted-title" fxLayout="row" fxLayoutGap="10px">
+          <div (click)="showStories = !showStories"><i [ngClass]="{'show-list': showStories}" class="icon-anim fas fa-angle-down"></i></div>
+          <div>Stories</div>
+        </div>
+        <div class="story" [ngClass]="{'anim-list-item': showStories}" *ngFor="let story of submitted.story">
+          {{story.title }}
+        </div>
+      </div>
+      <div class="comments">
+        <div class="submitted-title" fxLayout="row" fxLayoutGap="10px">
+          <div (click)="showComments = !showComments"><i [ngClass]="{'show-list': showComments}" class="icon-anim fas fa-angle-down"></i></div>
+          <div>Comments</div>
+        </div>
+        <div class="comment" [ngClass]="{'anim-list-item': showComments}" *ngFor="let comment of submitted.comment">
+          <div class="content" [innerHTML]="comment.text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
