@@ -1,6 +1,6 @@
 # NgHackernews
 
-[Working demo here](https://thawing-everglades-88926.herokuapp.com/)
+[Working demo here](https://mpajuvesa.github.io/ng-hackernews/)
 
 ---
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4.
