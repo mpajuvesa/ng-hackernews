@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "node server.js",
     "aot": "ng serve --aot",
-    "build": "ng build --prod",
+    "build": "ng build --prod --base-href /ng-hackernews --deploy-url /ng-hackernews",
     "postinstall": "ng build --aot -prod",
     "test": "ng test",
     "lint": "ng lint",
